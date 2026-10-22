@@ -17,6 +17,7 @@
     
     # NixOS shortcuts
     nrs = "sudo nixos-rebuild switch";
+    gnrs = "cd /etc/nixos/ && git add . && git commit -m \"rebuild\" && git push && sudo nixos-rebuild switch";
     nfu = "cd /etc/nixos/ && sudo nix flake update && sudo nixos-rebuild switch -L";
     nsv = "nix store --verify --check-contents --repair";
  
