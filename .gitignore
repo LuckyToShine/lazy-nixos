@@ -1,0 +1,4 @@
+minegrub-world-sel-theme/*
+!minegrub-world-sel-theme/minegrub-world-selection/
+result
+result-*
