@@ -307,14 +307,7 @@
     yt-dlp
     zbar
     zenity
-    # Upstream re-uploaded the 1.23.3b tarball; override the stale hash from zen-browser-flake.
-    # Remove once the flake's sources.json is updated.
-    (let zp = zen-browser.packages."x86_64-linux"; in
-      zp.default.override {
-        zen-browser-unwrapped = zp.zen-browser-unwrapped.override {
-          hash = "sha256-uyBF0+IWVNQP6EElAJLurf0sH8gx7vtQkiJ3PIvcoUk=";
-        };
-      })
+    zen-browser.packages."x86_64-linux".default
 
     # Android tools
     android-studio

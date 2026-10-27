@@ -13,7 +13,8 @@
     la = "lsd -a";
     lla = "lsd -la";
     lt = "lsd --tree";
-    wled = "echo 1 > /sys/class/leds/*::scrolllock/brightness";
+    wled = "brightnessctl --device='*::scrolllock' set 1";
+    timesh = "export HISTTIMEFORMAT='%F %T' && history";
     
     # NixOS shortcuts
     nrs = "sudo nixos-rebuild switch";
