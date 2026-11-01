@@ -5,4 +5,14 @@
 
   # Let Home Manager manage itself
   programs.home-manager.enable = true;
+
+  # Example Home Manager / Claude Code or Codex config (~/.claude/mcp.json or similar)
+  home.file.".claude/mcp.json".text = builtins.toJSON {
+    mcpServers = {
+      rea = {
+        command = "${rea-flake.packages.${pkgs.system}.default}/bin/rea";
+        args = [ "mcp" ];
+    };
+  };
+};
 }

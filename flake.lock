@@ -187,6 +187,26 @@
         "type": "github"
       }
     },
+    "rea-flake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793188795,
+        "narHash": "sha256-v+n10bAgDK87vvytFdzujUIOHXtFOUDoUYmGlPTtBcg=",
+        "owner": "Fractal-Tess",
+        "repo": "rea-flake",
+        "rev": "88e059ca2a03550c6ada53dcc71be54f5b948870",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Fractal-Tess",
+        "repo": "rea-flake",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -195,6 +215,7 @@
         "nix-claude-code": "nix-claude-code",
         "nix-matlab": "nix-matlab",
         "nixpkgs": "nixpkgs",
+        "rea-flake": "rea-flake",
         "zen-browser": "zen-browser"
       }
     },
