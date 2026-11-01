@@ -288,6 +288,7 @@
     playerctl
     pnpm
     procps
+    ripgrep
     satty
     slurp
     spotify

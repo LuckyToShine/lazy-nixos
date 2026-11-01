@@ -10,9 +10,9 @@
   home.file.".claude/mcp.json".text = builtins.toJSON {
     mcpServers = {
       rea = {
-        command = "${rea-flake.packages.${pkgs.system}.default}/bin/rea";
+        command = "${inputs.rea-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/rea";
         args = [ "mcp" ];
+      };
     };
   };
-};
 }
