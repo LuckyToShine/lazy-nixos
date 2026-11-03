@@ -30,6 +30,17 @@
       flake = false;
     };
 
+    # AI Skills & Prompts
+    ponytail-src = {
+      url = "github:DietrichGebert/ponytail";
+      flake = false;
+    };
+
+    agent-skills-src = {
+      url = "github:addyosmani/agent-skills";
+      flake = false;
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

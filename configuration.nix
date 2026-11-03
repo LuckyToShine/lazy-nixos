@@ -189,10 +189,25 @@
   # ==========================================
   # NIX STORE & DISK SPACE OPTIMIZATIONS
   # ==========================================
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    problems.handlers = {
+      "gtk+".broken = "warn";
+    };
+  };
 
   nixpkgs.overlays = [
-    inputs.nix-matlab.overlay
+    # Override nix-matlab to replace deprecated/broken gtk2 with gtk3
+    (final: prev: let
+      fixedTargetPkgs = p: import "${inputs.nix-matlab}/common.nix" (p // { gtk2 = p.gtk3; });
+    in {
+      matlab = inputs.nix-matlab.packages.${prev.stdenv.hostPlatform.system}.matlab.override {
+        targetPkgs = fixedTargetPkgs;
+      };
+      matlab-shell = inputs.nix-matlab.packages.${prev.stdenv.hostPlatform.system}.matlab-shell.override {
+        targetPkgs = fixedTargetPkgs;
+      };
+    })
     inputs.nix-claude-code.overlays.default
   ];
 
@@ -252,6 +267,7 @@
     aria2
     bat
     btop
+    cargo
     claude-code
     curl
     direnv
@@ -289,6 +305,7 @@
     pnpm
     procps
     ripgrep
+    rustc
     satty
     slurp
     spotify
