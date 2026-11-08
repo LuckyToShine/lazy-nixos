@@ -52,7 +52,15 @@
     };
     nix-claude-code = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:ryoppippi/nix-claude-code"; 
+      url = "github:ryoppippi/nix-claude-code";
+    };
+
+    # Thorn desktop build. Local checkout: the GitHub repo is private and
+    # `sudo nixos-rebuild` fetches as root, which has no GitHub login.
+    # Pick up new commits with: nix flake update thorn
+    thorn = {
+      url = "git+file:///home/lazy/thorn";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

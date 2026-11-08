@@ -86,7 +86,7 @@
     };
     desktopManager = {
       xterm.enable = false;
-      xfce.enable = false;
+      xfce.enable = true;
     };
  
     windowManager.i3 = {
@@ -166,6 +166,9 @@
   services.power-profiles-daemon.enable = true;
   services.printing.enable = false;
   services.fwupd.enable = false;
+
+  # Enable mouse support in virtual consoles (TTY)
+  services.gpm.enable = true;
 
   # Enable disk mounting capabilities for Dolphin
   services.udisks2.enable = true;
@@ -263,8 +266,10 @@
   # ==========================================
   environment.systemPackages = with pkgs; [
     # Essentials & Core CLI Utilities
+    alacritty 
     ani-cli
     aria2
+    aseprite
     bat
     btop
     cargo
@@ -277,14 +282,17 @@
     ente-auth
     evtest
     fastfetch
+    fd
     fetch
     ffmpeg
     file
     flutter
     foot
     fzf
+    gcc
     gh
     git
+    gnumake
     grim
     inotify-tools
     jdk21
@@ -293,12 +301,15 @@
     libreoffice-stable
     localsend
     lsd
+    lua-language-server
     lutris
     matlab
     matlab-shell
     matugen
     mpv
     nodejs_22
+    neovim
+    nixd
     octave
     p7zip
     playerctl
@@ -309,21 +320,25 @@
     satty
     slurp
     spotify
+    stylua
     syncplay
     tldr
     unrar
     unzip
     vim
     vivaldi
+    vscode
     wev
     wget
     whitesur-icon-theme
     wmctrl
     wl-clipboard
+    xfce4-whiskermenu-plugin
     ydotool
     yq-go
     yt-dlp
     zbar
+    zed-editor
     zenity
     zen-browser.packages."x86_64-linux".default
 

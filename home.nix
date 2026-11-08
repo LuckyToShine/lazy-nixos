@@ -83,6 +83,7 @@ in
   home.packages = [
     graphify
     omniroute
+    inputs.thorn.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # OmniRoute autostart (NixOS-safe replacement for `omniroute autostart enable`,
