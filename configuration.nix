@@ -51,6 +51,10 @@
     ACTION=="add|change", SUBSYSTEM=="leds", KERNEL=="*::scrolllock", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/leds/%k/brightness"
   '';
 
+  services.ollama = {
+    enable = true;
+  };
+
   services.envfs.enable = true;
 
   # ==========================================
@@ -113,9 +117,15 @@
 
   programs.inir = {
     enable = true;
-    service.compositor = "niri";
+    # Prevent inir's NixOS module from adding undeclared apps (kitty, nautilus, etc.) to systemPackages
+    package = inputs.inir.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
+      passthru = (old.passthru or { }) // {
+        runtimeDependencies = [ ];
+      };
+    });
     extraPackages = [ config.programs.niri.package ];
   };
+  programs.fish.enable = false;
 
   # XDG Portals
   xdg.portal = {
@@ -211,6 +221,20 @@
         targetPkgs = fixedTargetPkgs;
       };
     })
+    (final: prev: {
+      lutris = prev.lutris.override {
+        lutris-unwrapped = prev.lutris-unwrapped.overrideAttrs (oldAttrs: {
+          postPatch = (oldAttrs.postPatch or "") + ''
+            substituteInPlace lutris/util/display.py \
+              --replace-fail 'if LIB_GNOME_DESKTOP_AVAILABLE:' 'if LIB_GNOME_DESKTOP_AVAILABLE and hasattr(GnomeDesktop, "RRScreen"):'
+          '';
+        });
+        extraPkgs = pkgs: [
+          pkgs.wineWow64Packages.stable
+          pkgs.winetricks
+        ];
+      };
+    })
     inputs.nix-claude-code.overlays.default
   ];
 
@@ -266,21 +290,27 @@
   # ==========================================
   environment.systemPackages = with pkgs; [
     # Essentials & Core CLI Utilities
-    alacritty 
+    alacritty
     ani-cli
     aria2
     aseprite
+    ast-grep
     bat
+    binaryen
     btop
     cargo
+    cargo-nextest
     claude-code
+    clippy
     curl
+    delta
     direnv
     dtc
     dysk
     efibootmgr
     ente-auth
     evtest
+    eza
     fastfetch
     fd
     fetch
@@ -295,10 +325,12 @@
     gnumake
     grim
     inotify-tools
+    jaq
     jdk21
     xwayland
     killall
     libreoffice-stable
+    lmms
     localsend
     lsd
     lua-language-server
@@ -306,6 +338,7 @@
     matlab
     matlab-shell
     matugen
+    metadata-cleaner  
     mpv
     nodejs_22
     neovim
@@ -317,7 +350,10 @@
     procps
     ripgrep
     rustc
+    rustfmt
     satty
+    sd
+    shellcheck
     slurp
     spotify
     stylua
@@ -334,6 +370,8 @@
     wmctrl
     wl-clipboard
     xfce4-whiskermenu-plugin
+    xh
+    yazi  
     ydotool
     yq-go
     yt-dlp
