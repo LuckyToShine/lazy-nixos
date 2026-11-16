@@ -84,6 +84,7 @@ in
     graphify
     omniroute
     inputs.thorn.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
   ];
 
   # OmniRoute autostart (NixOS-safe replacement for `omniroute autostart enable`,
@@ -119,6 +120,15 @@ in
         };
       };
     };
+    # agy (Antigravity CLI) global rules -> live symlink to the shared AGENTS.md
+    ".gemini/config/AGENTS.md".source =
+      config.lib.file.mkOutOfStoreSymlink "/etc/nixos/AGENTS.md";
+
+    # Learnharness
+    ".claude/skills/learnharness".source =
+    "${inputs.learnharness}/skills/learnharness";
+    ".agents/skills/learnharness".source =
+    "${inputs.learnharness}/skills/learnharness";
 
     # Ponytail (single skill)
     ".claude/skills/ponytail".source = "${inputs.ponytail-src}/skills/ponytail";

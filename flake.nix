@@ -41,6 +41,11 @@
       flake = false;
     };
 
+    learnharness ={
+      url = "github:amosblomqvist/learnharness";
+      flake = false;
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,6 +59,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:ryoppippi/nix-claude-code";
     };
+
+    # Claude Desktop (official .deb repack, kept current by numtide)
+    llm-agents.url = "github:numtide/llm-agents.nix";
 
     # Thorn desktop build. Local checkout: the GitHub repo is private and
     # `sudo nixos-rebuild` fetches as root, which has no GitHub login.
