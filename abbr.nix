@@ -3,6 +3,7 @@
   # Environment variables (like `export N="/etc/nixos"` in .bashrc)
   variables = {
     N = "/etc/nixos";
+    HISTTIMEFORMAT = "%F %T ";
   };
 
   # Define your abbreviations in a standard Nix attribute set
@@ -10,11 +11,11 @@
     # System shortcuts
     ls = "lsd";
     l  = "lsd -l";
-    la = "lsd -a";
-    lla = "lsd -la";
+    la = "lsd -A";
+    lla = "lsd -lA";
     lt = "lsd --tree";
     wled = "brightnessctl --device='*::scrolllock' set 1";
-    timesh = "export HISTTIMEFORMAT='%F %T' && history";
+    timesh = "HISTTIMEFORMAT='%F %T' history";
     
     # NixOS shortcuts
     nrs = "sudo nixos-rebuild switch";
@@ -23,6 +24,9 @@
     gnfu = "cd /etc/nixos/ && sudo nix flake update && sudo nixos-rebuild switch -L && git add . && git commit -m \"flake update\" && git push";
     nsv = "nix store --verify --check-contents --repair";
  
+    # Tools
+    n = "nvim";
+
     # Git shortcuts
     g = "git";
     gs = "git status";
