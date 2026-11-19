@@ -289,6 +289,7 @@
   # SYSTEM PACKAGES (Optimized for 64GB USB)
   # ==========================================
   environment.systemPackages = with pkgs; [
+    (callPackage ./rakazo.nix {})
     # Essentials & Core CLI Utilities
     alacritty
     ani-cli
