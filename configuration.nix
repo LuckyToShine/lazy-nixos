@@ -4,6 +4,7 @@
   virtualisation = {
     waydroid.enable = true;
     waydroid.package = pkgs.waydroid-nftables;
+    docker.enable = true; # needed for self-hosted Rakazo
   };
 
   imports = [
@@ -132,6 +133,7 @@
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+      kdePackages.xdg-desktop-portal-kde  # KDE (Dolphin-style) file chooser
     ];
   };
 
@@ -265,6 +267,13 @@
   programs.dconf.enable = true;
   programs.nix-ld.enable = true;
 
+  # Zen as the default browser for links (http/https) and HTML files
+  xdg.mime.defaultApplications = {
+    "x-scheme-handler/http" = "zen.desktop";
+    "x-scheme-handler/https" = "zen.desktop";
+    "text/html" = "zen.desktop";
+  };
+
   # Qt / KDE Theming configuration for Dolphin & Niri
   qt = {
     enable = true;
@@ -278,7 +287,7 @@
   users.users."lazy" = {
     isNormalUser = true;
     description = "lazy";
-    extraGroups = [ "networkmanager" "wheel" "video" "adbusers" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "adbusers" "docker" ];
     shell = pkgs.bash;
     packages = with pkgs; [ ];
   };
@@ -317,6 +326,7 @@
     fetch
     ffmpeg
     file
+    openssl # needed by Rakazo's install-images.sh
     flutter
     foot
     fzf
@@ -429,6 +439,8 @@
     kdePackages.breeze-icons   # Fallback theme for KDE apps
     kdePackages.qtwayland      # Wayland support for Qt Apps
     kdePackages.ark            # Archive manager integrated with Dolphin
+    kdePackages.breeze         # Breeze Qt style + BreezeDark color scheme
+    adw-gtk3                   # GTK theme referenced by settings.ini (was missing -> black text)
 
     # -------------------------
     # Quickshell Wrapped with Qt6 & Kirigami

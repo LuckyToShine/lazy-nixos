@@ -1,5 +1,5 @@
 # /etc/nixos/home.nix
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   graphify = pkgs.python3Packages.buildPythonApplication {
@@ -74,6 +74,21 @@ let
     name = ".agents/skills/${name}";
     value = { source = "${inputs.agent-skills-src}/skills/${name}"; };
   }) agentSkillNames);
+
+  # Shared MCP servers for Claude Code and agy
+  mcpConfig = {
+    mcpServers = {
+      rea = {
+        command = "${inputs.rea-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/rea";
+        args = [ "mcp" ];
+      };
+      graphify = {
+        # MCP stdio server is `python -m graphify.serve [graph.json]` (default: ./graphify-out/graph.json)
+        command = "${pkgs.python3.withPackages (_: [ (pkgs.python3Packages.toPythonModule graphify) ])}/bin/python";
+        args = [ "-m" "graphify.serve" ];
+      };
+    };
+  };
 in
 {
   home.stateVersion = "26.05";
@@ -105,20 +120,38 @@ in
     Install.WantedBy = [ "default.target" ];
   };
 
-  # Configure Claude Code MCP servers & AI skills declaratively
+  # agy (Antigravity CLI) skills: mirror everything Claude Code has in
+  # ~/.claude/skills (flake-managed + manually installed) into agy's global
+  # skills dir. agy skips symlinked skills and /nix/store paths, so these must
+  # be real copies; a manifest tracks what we own so agy-only skills survive.
+  home.activation.agySkills = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    if [[ -z "''${DRY_RUN:-}" ]]; then
+      src="$HOME/.claude/skills"
+      dst="$HOME/.gemini/config/skills"
+      manifest="$dst/.hm-managed"
+      mkdir -p "$dst"
+      if [[ -f "$manifest" ]]; then
+        while IFS= read -r name; do
+          [[ -n "$name" ]] && rm -rf "''${dst:?}/$name"
+        done < "$manifest"
+      fi
+      : > "$manifest"
+      for s in "$src"/*/; do
+        name=$(basename "$s")
+        [[ -f "$s/SKILL.md" ]] || continue  # skips e.g. Claude Desktop's `synced`
+        ${pkgs.rsync}/bin/rsync -rL --chmod=u+rwX --exclude=.git "$s" "$dst/$name/"
+        echo "$name" >> "$manifest"
+      done
+    fi
+  '';
+
+  # Configure Claude Code + agy MCP servers & AI skills declaratively
   home.file = {
-    ".claude/mcp.json".text = builtins.toJSON {
-      mcpServers = {
-        rea = {
-          command = "${inputs.rea-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/rea";
-          args = [ "mcp" ];
-        };
-        graphify = {
-          # MCP stdio server is `python -m graphify.serve [graph.json]` (default: ./graphify-out/graph.json)
-          command = "${pkgs.python3.withPackages (_: [ (pkgs.python3Packages.toPythonModule graphify) ])}/bin/python";
-          args = [ "-m" "graphify.serve" ];
-        };
-      };
+    ".claude/mcp.json".text = builtins.toJSON mcpConfig;
+    # agy global MCP servers (same set as Claude Code)
+    ".gemini/config/mcp_config.json" = {
+      text = builtins.toJSON mcpConfig;
+      force = true; # replaces the empty file agy created
     };
     # agy (Antigravity CLI) global rules -> live symlink to the shared AGENTS.md
     ".gemini/config/AGENTS.md".source =
