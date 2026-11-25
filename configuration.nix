@@ -242,13 +242,18 @@
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    auto-optimise-store = true; # Hard-link duplicate files to save GBs on USB
     warn-dirty = false;
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
   };
 
   nix.gc = {
     automatic = true;
     dates = "weekly";
+    persistent = false;
     options = "--delete-older-than 7d";
   };
 
@@ -354,6 +359,7 @@
     nodejs_22
     neovim
     nixd
+    obsidian
     octave
     p7zip
     playerctl
