@@ -5,7 +5,12 @@
     waydroid.enable = true;
     waydroid.package = pkgs.waydroid-nftables;
     docker.enable = true; # needed for self-hosted Rakazo
+    # Socket-activated: dockerd starts on first `docker` command, not at boot
+    docker.enableOnBoot = false;
   };
+
+  # Waydroid container starts on demand: `sudo systemctl start waydroid-container`
+  systemd.services.waydroid-container.wantedBy = lib.mkForce [ ];
 
   imports = [
     # Hardware scan results and module inputs
@@ -252,7 +257,7 @@
 
   nix.gc = {
     automatic = true;
-    dates = "weekly";
+    dates = "Sun 15:00";
     persistent = false;
     options = "--delete-older-than 7d";
   };
