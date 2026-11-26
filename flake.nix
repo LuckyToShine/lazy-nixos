@@ -41,6 +41,17 @@
       flake = false;
     };
 
+    # Obsidian second-brain skills
+    claude-obsidian-src = {
+      url = "github:AgriciDaniel/claude-obsidian";
+      flake = false;
+    };
+
+    obsidian-second-brain-src = {
+      url = "github:eugeniughelbur/obsidian-second-brain";
+      flake = false;
+    };
+
     learnharness ={
       url = "github:amosblomqvist/learnharness";
       flake = false;

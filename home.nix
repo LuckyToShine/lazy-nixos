@@ -75,6 +75,31 @@ let
     value = { source = "${inputs.agent-skills-src}/skills/${name}"; };
   }) agentSkillNames);
 
+  # Map every <src>/<dir>/<name> to both ~/.claude/skills and ~/.agents/skills
+  skillsFrom = dir: builtins.listToAttrs (builtins.concatMap (name: [
+    { name = ".claude/skills/${name}"; value.source = "${dir}/${name}"; }
+    { name = ".agents/skills/${name}"; value.source = "${dir}/${name}"; }
+  ]) (builtins.attrNames (builtins.readDir dir)));
+
+  # Map every *.md in a dir to ~/.claude/<target>/<file>
+  mdFilesFrom = dir: target: builtins.listToAttrs (map (f: {
+    name = ".claude/${target}/${f}";
+    value.source = "${dir}/${f}";
+  }) (builtins.filter (f: lib.hasSuffix ".md" f)
+    (builtins.attrNames (builtins.readDir dir))));
+
+  # AgriciDaniel/claude-obsidian: skills/* + subagents (plugin hooks skipped:
+  # they need CLAUDE_PLUGIN_ROOT, only set when installed as a plugin)
+  claudeObsidian = skillsFrom "${inputs.claude-obsidian-src}/skills"
+    // mdFilesFrom "${inputs.claude-obsidian-src}/agents" "agents";
+
+  # eugeniughelbur/obsidian-second-brain: repo root is the skill (SKILL.md,
+  # references/, scripts/); commands/*.md are Claude Code slash commands
+  obsidianSecondBrain = {
+    ".claude/skills/obsidian-second-brain".source = inputs.obsidian-second-brain-src;
+    ".agents/skills/obsidian-second-brain".source = inputs.obsidian-second-brain-src;
+  } // mdFilesFrom "${inputs.obsidian-second-brain-src}/commands" "commands";
+
   # Shared MCP servers for Claude Code and agy
   mcpConfig = {
     mcpServers = {
@@ -166,5 +191,5 @@ in
     # Ponytail (single skill)
     ".claude/skills/ponytail".source = "${inputs.ponytail-src}/skills/ponytail";
     ".agents/skills/ponytail".source = "${inputs.ponytail-src}/skills/ponytail";
-  } // claudeSkills // genericSkills;
+  } // claudeSkills // genericSkills // claudeObsidian // obsidianSecondBrain;
 }
