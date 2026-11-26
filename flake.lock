@@ -3,11 +3,11 @@
     "agent-skills-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1795032397,
-        "narHash": "sha256-LqVRMZ5sSxXkCt5/PwYeJeiJxpQtAdUuQYIDrcQH1+A=",
+        "lastModified": 1795504275,
+        "narHash": "sha256-ojE2FGwmmWn3Q3eJ3AdNBUpa7E/He3Chkp7EpbYAnYc=",
         "owner": "addyosmani",
         "repo": "agent-skills",
-        "rev": "8c99fa36d90068c82d547f7c12a9d67a3e95f4ee",
+        "rev": "e997ac5b9a74eab332d5e9793bb38a38c8cfdd74",
         "type": "github"
       },
       "original": {
@@ -47,6 +47,22 @@
         "owner": "Mic92",
         "ref": "llm-agents",
         "repo": "bun2nix",
+        "type": "github"
+      }
+    },
+    "claude-obsidian-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792687628,
+        "narHash": "sha256-zjOVb1apdLoxGTrUNrTHZDAv8jGPRuFRs28snl9bBn4=",
+        "owner": "AgriciDaniel",
+        "repo": "claude-obsidian",
+        "rev": "2e545563172f97f02ecaaaab376ceea1246a0583",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AgriciDaniel",
+        "repo": "claude-obsidian",
         "type": "github"
       }
     },
@@ -90,11 +106,11 @@
     "graphify-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1795454644,
-        "narHash": "sha256-qRbhRAq+ytjEh2eHhpwD+gNw9cYEz0naw48gaAkhEQA=",
+        "lastModified": 1795728093,
+        "narHash": "sha256-/iJVZrNi5d2PyN28y8Vya2cV/pWI4H4CFXnQisWoA4Q=",
         "owner": "Graphify-Labs",
         "repo": "graphify",
-        "rev": "013a6461c31da6e003c0dea191aca84c94cb8d47",
+        "rev": "0f22ae762e3e3d0b689fc7ad2b8192740628413b",
         "type": "github"
       },
       "original": {
@@ -110,11 +126,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795366757,
-        "narHash": "sha256-Tp4Kh4R7ID1f2mMCDlb2PiFQ/DZZsnXB2u2juWN+TT4=",
+        "lastModified": 1795713076,
+        "narHash": "sha256-GUY/RHSSnAJKKI3xk7xrSXrsXFgIOgFrRJOD4uub5J8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3b8140d21fa0a70b1b38c2ed29853dfe686234a6",
+        "rev": "361da94fb55c67094ec47322d2757d6616a0de92",
         "type": "github"
       },
       "original": {
@@ -146,11 +162,11 @@
     "learnharness": {
       "flake": false,
       "locked": {
-        "lastModified": 1795248628,
-        "narHash": "sha256-NqU65U2MYLkS8WSOQgqryBzpBhkqZvqyZd6kSXCDDeE=",
+        "lastModified": 1795657978,
+        "narHash": "sha256-3M7umGz+LQkbKNReos+1o87/qWbE7j9Yc76yIH6b/b8=",
         "owner": "amosblomqvist",
         "repo": "learnharness",
-        "rev": "069a6a11fb99e6d1388fba0e6680bbc8cf7921ce",
+        "rev": "e3cfff6ee7b91d94cd7ed3eea0dcbf8807773fe8",
         "type": "github"
       },
       "original": {
@@ -168,11 +184,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1795416666,
-        "narHash": "sha256-b1GmfrMPoZ2ANkR0we9Q9KQN6n1e+vNyDqt1p4CNEAY=",
+        "lastModified": 1795702923,
+        "narHash": "sha256-OvSz3gO7ualG+RziLMyiKecxfkqVlt43YUzAbh/+UwU=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "5330ee115c06d2b43f49e902130125eab579b22f",
+        "rev": "9e137fb04294426cdd3a8f97d5a6835c9124e13f",
         "type": "github"
       },
       "original": {
@@ -246,11 +262,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795471247,
-        "narHash": "sha256-iXVncp5B9TvLmfNXvmAn3dx+0qPbvu8HcSCQ8MschBY=",
+        "lastModified": 1795572073,
+        "narHash": "sha256-dT929g6fNintJEdsdn6TUBEVs+dMhkkzT1hhd5SkU0Y=",
         "owner": "ryoppippi",
         "repo": "nix-claude-code",
-        "rev": "9d243c899e7d1f2ced773d732842ed64a540b9b8",
+        "rev": "01e929d9f7e6328eb6c9e9e521c73a67ac8bfe60",
         "type": "github"
       },
       "original": {
@@ -328,6 +344,22 @@
         "type": "github"
       }
     },
+    "obsidian-second-brain-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795714629,
+        "narHash": "sha256-VClxJ2Y93Yci8RgicgVSEob9rSU26YnXuoM7PZCGcj0=",
+        "owner": "eugeniughelbur",
+        "repo": "obsidian-second-brain",
+        "rev": "d6bae6272baa2f844ad3f1f176de276e88776bdb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eugeniughelbur",
+        "repo": "obsidian-second-brain",
+        "type": "github"
+      }
+    },
     "ponytail-src": {
       "flake": false,
       "locked": {
@@ -367,6 +399,7 @@
     "root": {
       "inputs": {
         "agent-skills-src": "agent-skills-src",
+        "claude-obsidian-src": "claude-obsidian-src",
         "graphify-src": "graphify-src",
         "home-manager": "home-manager",
         "inir": "inir",
@@ -376,6 +409,7 @@
         "nix-claude-code": "nix-claude-code",
         "nix-matlab": "nix-matlab",
         "nixpkgs": "nixpkgs_2",
+        "obsidian-second-brain-src": "obsidian-second-brain-src",
         "ponytail-src": "ponytail-src",
         "rea-flake": "rea-flake",
         "thorn": "thorn",
@@ -404,11 +438,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795398538,
-        "narHash": "sha256-n8Zp6ychZYdqegwNxtcOON7QOfFMiJOSpaqrbB9zy4U=",
+        "lastModified": 1795659817,
+        "narHash": "sha256-+4k9G8SJAnIhdTyjjrM/IdRW/KPTnmY2sc2aoEkUHz8=",
         "ref": "refs/heads/main",
-        "rev": "424d9c7ffccd14595065a38b7d4f02df6e20e1d8",
-        "revCount": 45,
+        "rev": "557e7e6caad751242d00b1719c246a1e43ba3af8",
+        "revCount": 59,
         "type": "git",
         "url": "file:///home/lazy/thorn"
       },
@@ -425,11 +459,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795173499,
-        "narHash": "sha256-J8IYl3oEdctyvBgWr+/L01MY5Xm0TU4WXwZDccN5jjk=",
+        "lastModified": 1795615686,
+        "narHash": "sha256-/C0FK2Fwq0aWE/GADYyYbAIdQeGfYBbWMin3tfks1NA=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "a0a97e31a897a3537eea5c49df4f8adaa83b3b37",
+        "rev": "b7b56d3c8833016c650ca542b1230e6130299741",
         "type": "github"
       },
       "original": {
